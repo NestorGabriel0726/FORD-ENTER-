@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio do Sprint</title>
+</head>
+<body>
+    <script>
+
+      
+
+        // Criando prompts em variáveis para armazenar os valores de distancia e consumo do usuário
+        let textoDistancia = (prompt('Qual a distância percorrida da sua casa até seu trabalho (em km)?'));
+        let distancia = parseFloat(textoDistancia.replace(',' , '.'));
+         
+        // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
+        while (isNaN(distancia)) {
+            alert('Erro! Digite um número válido para prosseguir');
+            textoDistancia = prompt('Qual a distância percorrida da sua casa até seu trabalho (em km)?');
+            distancia = parseFloat(textoDistancia.replace(',' , '.'));  // Tratamento da virgula
+        }
+
+        let textoConsumo = (prompt('Qual o consumo médio do seu veículo (em Km/L)?'));
+        let consumoMedio = parseFloat(textoConsumo.replace(',' , '.'));      
+        
+        // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
+        while (isNaN(consumoMedio)) {
+            alert('Erro! Digite um número válido para prosseguir')
+            textoConsumo = prompt('Qual o consumo médio do seu veículo (em Km/L)?');
+            consumoMedio = parseFloat(textoConsumo.replace(',' , '.'));  // Tratamento da virgula
+        }
+        
+
+        // Armazenando o valor do cauculo em uma variável
+        var consumo_NecessarioLitros = distancia/consumoMedio;
+
+        menorValor = Infinity;
+
+        function media(soma_dosPostos, quantidade_postos){
+           let resultadoMedia = soma_dosPostos/quantidade_postos;
+           return resultadoMedia.toFixed(2);
+        }
+
+        function gastoDiario(consumo_NecessarioLitros, menorValor){
+            let resultadoGasto = 2*(consumo_NecessarioLitros*menorValor);
+            return resultadoGasto.toFixed(2);
+        }
+
+        // Perguntando ao usuário em quantos postos ele fez a pesquisa
+        let quantidade_postos = parseInt(prompt('Em quantos postos você pesquisou os valores de combustível?'))
+
+        var soma_dosPostos = 0; // Variável criada para ser utilizada no loop para realizar a soma de todos os valores digitados
+
+        // Montando a estrutura de repetição para armazenar os valores de cada postopostos
+        for (let i = 0; i < quantidade_postos; i++) {
+            let valor_dos_postos = parseFloat(prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`));
+
+            // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
+            while (isNaN(valor_dos_postos)) {
+                alert(`Erro! Digite um número válido para prosseguir (ex: 5.80)`);
+                entrada = prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`);
+                valor_dos_postos = parseFloat(entrada.replace(',', '.')); // Convertendo , em . 
+            }
+
+            soma_dosPostos += valor_dos_postos; // Somando os valores digitados 
+
+            // Condição para que ele verifique qual o menor valor digitado
+            if (valor_dos_postos < menorValor) {
+                menorValor = valor_dos_postos // aqui ele substitui o valor digitado, caso ele seja o menor
+            }
+            menorValor = parseFloat(menorValor);
+        }
+
+        // Informando ao usuário o consumo necessário
+        document.write('O consumo necessário é de ' + consumo_NecessarioLitros + ' Litros <br>');
+
+        // Informando ao usuário qual é o menor valor pesquisado
+        document.write(`O menor valor pesquisado é R$${menorValor} <br>`);
+
+        // Informando ao usuário a média de valores pesquisados
+        document.write(`A média dos preços é de R$${media(soma_dosPostos, quantidade_postos)} <br>`);
+
+        // Informando ao usuário o gasto diário necessário
+        document.write(`O gasto diário necessário é R$${gastoDiario(consumo_NecessarioLitros, menorValor)}`);
+
+    </script>
+</body>
+</html>
