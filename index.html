@@ -8,6 +8,10 @@
 <body>
     <script>
 
+        // Definindo uma função para apresentar os resultados e quebrar a linha
+        function resultadosFinais(frase) {
+            document.write(frase + '<br>')
+        };
       
 
         // Criando prompts em variáveis para armazenar os valores de distancia e consumo do usuário
@@ -48,19 +52,31 @@
         }
 
         // Perguntando ao usuário em quantos postos ele fez a pesquisa
-        let quantidade_postos = parseInt(prompt('Em quantos postos você pesquisou os valores de combustível?'))
+        let quantidade_postos = parseInt(prompt('Em quantos postos você pesquisou os valores de combustível?'));
+        
+
+        // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
+        while(isNaN(quantidade_postos)) {
+            alert('Erro! Digite apenas números para prosseguir');
+            quantidade_postos = parseInt(prompt('Em quantos postos você pesquisou os valores de combustível?'));
+            continue;
+        }
 
         var soma_dosPostos = 0; // Variável criada para ser utilizada no loop para realizar a soma de todos os valores digitados
 
         // Montando a estrutura de repetição para armazenar os valores de cada postopostos
         for (let i = 0; i < quantidade_postos; i++) {
-            let valor_dos_postos = parseFloat(prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`));
+
+            let entradaPostos = prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`)
+
+            let valor_dos_postos = parseFloat(entradaPostos.replace(',' , '.'));
+
 
             // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
             while (isNaN(valor_dos_postos)) {
                 alert(`Erro! Digite um número válido para prosseguir (ex: 5.80)`);
-                entrada = prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`);
-                valor_dos_postos = parseFloat(entrada.replace(',', '.')); // Convertendo , em . 
+                let entradaPostos = prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`);
+                valor_dos_postos = parseFloat(entradaPostos.replace(',', '.')); // Convertendo , em . 
             }
 
             soma_dosPostos += valor_dos_postos; // Somando os valores digitados 
@@ -68,21 +84,22 @@
             // Condição para que ele verifique qual o menor valor digitado
             if (valor_dos_postos < menorValor) {
                 menorValor = valor_dos_postos // aqui ele substitui o valor digitado, caso ele seja o menor
-            }
-            menorValor = parseFloat(menorValor);
-        }
+            };
+        };
+
+        // Chamando a função parar exibir os resultados:
 
         // Informando ao usuário o consumo necessário
-        document.write('O consumo necessário é de ' + consumo_NecessarioLitros + ' Litros <br>');
+        resultadosFinais(`O consumo necessário é de ${consumo_NecessarioLitros} Litros`);
 
         // Informando ao usuário qual é o menor valor pesquisado
-        document.write(`O menor valor pesquisado é R$${menorValor} <br>`);
+        resultadosFinais(`O menor valor pesquisado é R$${menorValor}`);
 
         // Informando ao usuário a média de valores pesquisados
-        document.write(`A média dos preços é de R$${media(soma_dosPostos, quantidade_postos)} <br>`);
+        resultadosFinais(`A média dos valores pesquisados é de R$${media(soma_dosPostos, quantidade_postos)}`);
 
         // Informando ao usuário o gasto diário necessário
-        document.write(`O gasto diário necessário é R$${gastoDiario(consumo_NecessarioLitros, menorValor)}`);
+        resultadosFinais(`O gasto diário necessário é R$${gastoDiario(consumo_NecessarioLitros, menorValor)}`);
 
     </script>
 </body>
