@@ -90,10 +90,10 @@
         // Chamando a função parar exibir os resultados:
 
         // Informando ao usuário o consumo necessário
-        resultadosFinais(`O consumo necessário é de ${consumo_NecessarioLitros} Litros`);
+        resultadosFinais(`O consumo necessário é de ${consumo_NecessarioLitros.toFixed(2)} Litros`);
 
         // Informando ao usuário qual é o menor valor pesquisado
-        resultadosFinais(`O menor valor pesquisado é R$${menorValor}`);
+        resultadosFinais(`O menor valor pesquisado é R$${menorValor.toFixed(2)}`);
 
         // Informando ao usuário a média de valores pesquisados
         resultadosFinais(`A média dos valores pesquisados é de R$${media(soma_dosPostos, quantidade_postos)}`);
