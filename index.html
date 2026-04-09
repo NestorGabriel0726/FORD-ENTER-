@@ -17,20 +17,22 @@
         // Criando prompts em variáveis para armazenar os valores de distancia e consumo do usuário
         let textoDistancia = (prompt('Qual a distância percorrida da sua casa até seu trabalho (em km)?'));
         let distancia = parseFloat(textoDistancia.replace(',' , '.'));
+
          
         // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
-        while (isNaN(distancia)) {
-            alert('Erro! Digite um número válido para prosseguir');
+        while (isNaN(distancia) || distancia <= 0) {
+            alert('Erro! Digite um número válido, superior a 0, para prosseguir');
             textoDistancia = prompt('Qual a distância percorrida da sua casa até seu trabalho (em km)?');
             distancia = parseFloat(textoDistancia.replace(',' , '.'));  // Tratamento da virgula
+
         }
 
         let textoConsumo = (prompt('Qual o consumo médio do seu veículo (em Km/L)?'));
         let consumoMedio = parseFloat(textoConsumo.replace(',' , '.'));      
         
         // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
-        while (isNaN(consumoMedio)) {
-            alert('Erro! Digite um número válido para prosseguir')
+        while (isNaN(consumoMedio) || consumoMedio <= 0) {
+            alert('Erro! Digite um número válido, superior a 0, para prosseguir')
             textoConsumo = prompt('Qual o consumo médio do seu veículo (em Km/L)?');
             consumoMedio = parseFloat(textoConsumo.replace(',' , '.'));  // Tratamento da virgula
         }
@@ -56,8 +58,8 @@
         
 
         // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
-        while(isNaN(quantidade_postos)) {
-            alert('Erro! Digite apenas números para prosseguir');
+        while(isNaN(quantidade_postos) || quantidade_postos <= 0) {
+            alert('Erro! Digite apenas números válidos, superior a 0, para prosseguir');
             quantidade_postos = parseInt(prompt('Em quantos postos você pesquisou os valores de combustível?'));
             continue;
         }
@@ -73,8 +75,8 @@
 
 
             // Criando um "enquanto" para não permitir que o usuário informe letras ou caracteres, apenas números
-            while (isNaN(valor_dos_postos)) {
-                alert(`Erro! Digite um número válido para prosseguir (ex: 5.80)`);
+            while (isNaN(valor_dos_postos) || valor_dos_postos <= 0) {
+                alert(`Erro! Digite um número válido para prosseguir (ex: 5.80). Esse número deve ser superior a 0`);
                 let entradaPostos = prompt(`Digite o valor encontrado (em R$) no posto ${i+1}`);
                 valor_dos_postos = parseFloat(entradaPostos.replace(',', '.')); // Convertendo , em . 
             }
